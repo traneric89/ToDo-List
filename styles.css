@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  --font-colour: rgb(255, 255, 255);
+}
+
+.project-column {
+  background-color: #89d1fe;
+  width: 20%;
+  height: 100vh;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 25%;
+  margin-top: 30px;
+  background-color: #89d1fe;
+}
+
+.project-title {
+  display: flex;
+  align-items: center;
+  margin: 30px 0 15px 0;
+  font-size: 30px;
+}
+
+.project-title h2,
+i {
+  margin: 0 10px 0 10px;
+}
+
+.fa-plus-circle {
+  color: #29c264;
+  background-color: white;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.project-list h4 {
+  font-size: 35px;
+  margin: 50px;
+  color: var(--font-colour);
+  cursor: pointer;
+}
+
+.todo-column {
+  background-color: #4eb2f5;
+  width: 80%;
+  height: 100vh;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-card {
+  background-color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 75%;
+}
+
+.todo-card img {
+  width: 30px;
+  cursor: pointer;
+}
+
+.project-details {
+  font-size: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 35px 60px 0 60px;
+}
+
+.todo {
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  margin: 35px 20px 35px 20px;
+  padding: 15px 40px 15px 40px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.fa-square-check {
+  color: #29c264;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.dual-btn img {
+  margin-right: 15px;
+}
+
+.priority {
+  display: flex;
+  align-items: center;
+}
+
+.priority button {
+  margin-left: 25px;
+}
+
+.btn-priority {
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  background-color: red;
+  cursor: pointer;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 15px;
+}

@@ -4,7 +4,60 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/c9965d66f7.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
     <title>To-Do List</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="project-column">
+        <img src="/images/logo.png" alt="logo" class="logo" />
+        <div class="project-title">
+          <h2>PROJECTS</h2>
+          <i class="fas fa-plus-circle fa-md"></i>
+        </div>
+        <div class="project-list">
+          <h4>Project 1</h4>
+          <h4>Project 2</h4>
+          <h4>Project 3</h4>
+          <h4>Project 4</h4>
+        </div>
+      </div>
+      <div class="todo-column">
+        <div class="todo-card">
+          <div class="project-details">
+            <h4>Project name</h4>
+            <div>
+              <img src="/images/pencil.png" alt="pencil" class="pencil" />
+              <i class="fas fa-plus-circle fa-md"></i>
+            </div>
+          </div>
+          <div class="todo">
+            <div class="top">
+              <div class="priority">
+                <p>Todo 1</p>
+                <i class="fa-solid fa-square-check fa-kmd"></i>
+              </div>
+              <div class="dual-btn">
+                <img src="/images/pencil.png" alt="pencil" class="pencil" />
+                <img src="/images/bin.png" alt="trash" class="trash" />
+              </div>
+            </div>
+            <div class="bottom">
+              <button class="btn btn-priority"></button>
+              <p>details of task</p>
+              <p>date</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
