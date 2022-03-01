@@ -1,3 +1,23 @@
+let projectArray = [];
+let projectList = document.getElementById("project-list");
+
+//buttons
+let addProjectBtn = document.getElementById("add-project");
+
+addProjectBtn.addEventListener("click", () =>
+  console.log("add project button clicked!!!!")
+);
+
+class project {
+  constructor(title, toDos = []) {
+    this.title = title;
+    this.toDos = toDos;
+  }
+  addProject() {
+    projectArray.push(this.title);
+  }
+}
+
 class toDo {
   constructor(title, prio, complete, details, date) {
     this.title = title;
@@ -19,23 +39,26 @@ class toDo {
   }
 }
 
-const testObj = new toDo("title1", "prio1", true, "detailsHere", "12-24-2022");
-console.log(testObj);
+// const newToDo = new toDo(
+//   "todotitle",
+//   "prio111",
+//   true,
+//   "detailsHere",
+//   "12-24-2022"
+// );
+// const newToDo1 = new toDo(
+//   "todotitleasdasdasd",
+//   "prio111asdasdasdasdasd",
+//   false,
+//   "detailsHereasdasdasdasd",
+//   "1-1-1-1"
+// );
 
-testObj.toDoComplete();
-console.log(testObj);
+// const newProject = new project("projectTitle");
+// console.table(newProject);
 
-/*
-list of project array, global???
-need projectObject 
+// newProject.toDos.push(newToDo);
+// console.table(newProject);
 
-function to add project()
-	event listener for green add button
-	popup for user to enter project name
-	
-
-projectArray = [proj1, proj2, proj3]
-
-function to add a todo to a project()
-	
-*/
+// newProject.toDos.push(newToDo1);
+// console.table(newProject);
