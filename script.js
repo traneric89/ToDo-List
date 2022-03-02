@@ -1,12 +1,17 @@
 let projectArray = [];
-let projectList = document.getElementById("project-list");
+let projectList = document.querySelector(".project-list");
 
-//buttons
+//Add project popup varaibles and buttons
 let addProjectBtn = document.getElementById("add-project");
+let addProjectPopup = document.querySelector(".add-project-popup");
+let addProjectForm = document.querySelector(".input-add-project-popup");
+let confirmAddProjectBtn = document.querySelector(".button-add-project-popup");
+let cancelProjectBtn = document.querySelector(".button-cancel-project-popup");
 
-addProjectBtn.addEventListener("click", () =>
-  console.log("add project button clicked!!!!")
-);
+//Event Listeners
+addProjectBtn.addEventListener("click", () => addNewProjectPopup());
+confirmAddProjectBtn.addEventListener("click", () => confirmAddProject());
+cancelProjectBtn.addEventListener("click", () => removeNewProjectPopup());
 
 class project {
   constructor(title, toDos = []) {
@@ -38,6 +43,27 @@ class toDo {
     this.date = date;
   }
 }
+
+const addNewProjectPopup = () => {
+  addProjectPopup.classList.add("active");
+};
+
+const confirmAddProject = () => {
+  if (addProjectForm.value != "") {
+    const newProject = new project(addProjectForm.value);
+    let newProjectTitle = document.createElement("h4");
+    newProjectTitle.textContent = addProjectForm.value;
+    projectList.appendChild(newProjectTitle);
+  }
+};
+
+const removeNewProjectPopup = () => {
+  addProjectPopup.classList.remove("active");
+};
+
+const renderProjects = () => {
+  projectList.textContent = "";
+};
 
 // const newToDo = new toDo(
 //   "todotitle",
