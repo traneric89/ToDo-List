@@ -72,26 +72,13 @@ const renderTodoCard = (e) => {
   divProjectDetails.classList.add("project-details");
   divTodoCard.appendChild(divProjectDetails);
 
-  let currentProjectTitle = document.createElement("h4");
-  currentProjectTitle.textContent = e.target.textContent;
+  let currentProjectTitle = document.createElement("input");
+  currentProjectTitle.value = `${e.target.textContent}`;
   divProjectDetails.appendChild(currentProjectTitle);
+  currentProjectTitle.addEventListener("change", projectTitleUpdate);
 
   let divEditProjectButtons = document.createElement("div");
   divProjectDetails.appendChild(divEditProjectButtons);
-
-  let editPencilButton = document.createElement("img");
-  editPencilButton.classList.add("pencil");
-  editPencilButton.src = "/images/pencil.png";
-  divEditProjectButtons.appendChild(editPencilButton);
-
-  const someEventHandler = (e, currentProjectTitle) => {
-    editProjectTitle(e, currentProjectTitle);
-  };
-
-  editPencilButton.addEventListener(
-    "click",
-    someEventHandler.bind(e, currentProjectTitle)
-  );
 
   let addTodoButton = document.createElement("i");
   addTodoButton.classList.add("fas", "fa-plus-circle", "fa-md");
@@ -123,11 +110,6 @@ const renderTodoTask = (e) => {
   dualButtonDiv.classList.add("dual-btn");
   divTop.appendChild(dualButtonDiv);
 
-  let editPencilButton = document.createElement("img");
-  editPencilButton.classList.add("pencil");
-  editPencilButton.src = "/images/pencil.png";
-  dualButtonDiv.appendChild(editPencilButton);
-
   let trashButton = document.createElement("img");
   editPencilButton.classList.add("trash");
   editPencilButton.src = "/images/bin.png";
@@ -150,13 +132,6 @@ const renderTodoTask = (e) => {
   divBottom.appendChild(todoDate);
 };
 
-const editProjectTitle = (e, currentProjectTitle) => {
-  console.log(e);
-  console.log(currentProjectTitle.target);
-  e.setAttribute("contenteditable", "true");
-  e.click();
-};
-
 const displayProject = (e) => {
   clearTodoCard();
   renderTodoCard(e);
@@ -168,4 +143,8 @@ const clearProjectList = () => {
 
 const clearTodoCard = () => {
   divTodoCard.textContent = "";
+};
+
+const projectTitleUpdate = (e) => {
+  console.log(e.target.value);
 };

@@ -146,6 +146,12 @@ i {
   margin: 35px 60px 15px 60px;
 }
 
+.project-details input {
+  background-color: #e0e0e0;
+  width: 50%;
+  padding: 0;
+}
+
 .todo {
   font-size: 25px;
   display: flex;
