@@ -20,9 +20,6 @@ class project {
     this.title = title;
     this.toDos = toDos;
   }
-  addProject() {
-    projectArray.push(this.title);
-  }
 }
 
 class toDo {
@@ -57,13 +54,10 @@ const removeNewProjectPopup = () => {
 const confirmAddProject = () => {
   if (addProjectForm.value != "") {
     const newProject = new project(addProjectForm.value);
-    newProject.addProject();
-    let newProjectTitle = document.createElement("h4");
-    newProjectTitle.addEventListener("click", (e) => displayProject(e));
-    newProjectTitle.textContent = addProjectForm.value;
-    projectList.appendChild(newProjectTitle);
+    projectArray.push(newProject);
     removeNewProjectPopup();
     addProjectForm.value = "";
+    displayProjectTitles();
   }
 };
 
@@ -132,9 +126,21 @@ const renderTodoTask = (e) => {
   divBottom.appendChild(todoDate);
 };
 
-const displayProject = (e) => {
+const displayProjectTitles = () => {
+  clearProjectList();
+  projectArray.forEach((project) => {
+    let newProjectTitle = document.createElement("h4");
+    newProjectTitle.addEventListener("click", (e) => displayProject(e));
+    newProjectTitle.textContent = project.title;
+    projectList.appendChild(newProjectTitle);
+  });
+};
+
+const displayProject = (project) => {
   clearTodoCard();
-  renderTodoCard(e);
+  renderTodoCard(project);
+  console.log(project);
+  console.log(project.target);
 };
 
 const clearProjectList = () => {
@@ -147,4 +153,5 @@ const clearTodoCard = () => {
 
 const projectTitleUpdate = (e) => {
   console.log(e.target.value);
+  console.log(projectArray);
 };
