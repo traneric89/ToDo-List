@@ -69,7 +69,11 @@ const renderTodoCard = (e) => {
   let currentProjectTitle = document.createElement("input");
   currentProjectTitle.value = `${e.target.textContent}`;
   divProjectDetails.appendChild(currentProjectTitle);
-  currentProjectTitle.addEventListener("change", projectTitleUpdate);
+
+  let oldProjectTitle = currentProjectTitle.value;
+  currentProjectTitle.addEventListener("change", (e) =>
+    projectTitleUpdate(oldProjectTitle, e)
+  );
 
   let divEditProjectButtons = document.createElement("div");
   divProjectDetails.appendChild(divEditProjectButtons);
@@ -139,8 +143,6 @@ const displayProjectTitles = () => {
 const displayProject = (project) => {
   clearTodoCard();
   renderTodoCard(project);
-  console.log(project);
-  console.log(project.target);
 };
 
 const clearProjectList = () => {
@@ -151,7 +153,18 @@ const clearTodoCard = () => {
   divTodoCard.textContent = "";
 };
 
-const projectTitleUpdate = (e) => {
-  console.log(e.target.value);
-  console.log(projectArray);
+const projectTitleUpdate = (currentProjectTitle, updatedTitle) => {
+  let indexOfProject = indexOfProjectTitleUpdate(currentProjectTitle);
+  projectArray[indexOfProject].title = updatedTitle.target.value;
+  displayProjectTitles();
+};
+
+const indexOfProjectTitleUpdate = (currentProject) => {
+  let index;
+  projectArray.forEach((project) => {
+    if (project.title == currentProject) {
+      index = projectArray.indexOf(project);
+    }
+  });
+  return index;
 };
