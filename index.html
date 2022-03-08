@@ -16,9 +16,53 @@
     <title>To-Do List</title>
   </head>
   <body>
+    <div class="form-container">
+      <div class="form">
+        <div class="title">Create Task</div>
+        <div class="input-container">
+          <input id="task-name" class="input" type="text" placeholder="Task" />
+        </div>
+        <div class="input-container">
+          <input
+            id="task-details"
+            class="input"
+            type="text"
+            placeholder="Details"
+          />
+        </div>
+        <div class="input-container">
+          <input
+            id="task-date"
+            class="input"
+            type="date"
+            min="2020-01-01"
+            max="2030-12-31"
+            value="2022-03-07"
+            placeholder="Date yy-mm-dd"
+          />
+        </div>
+        <div class="color-input-container">
+          <label for="task-priority">Priority</label>
+          <input
+            type="color"
+            value="#FF0000"
+            id="task-priority"
+            class="prio-input"
+          />
+        </div>
+        <div class="add-todo-buttons">
+          <button class="button-add-project-popup" id="button-add-todo">
+            Add
+          </button>
+          <button class="button-cancel-project-popup" id="button-cancel-todo">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="project-column">
-        <img src="/images/logo.png" alt="logo" class="logo" />
+        <img src="/images/logo.jpg" alt="logo" class="logo" />
         <div class="project-title">
           <h2>PROJECTS</h2>
           <i class="fas fa-plus-circle fa-md" id="add-project"></i>
@@ -53,53 +97,6 @@
         </div>
       </div>
       <div class="todo-column">
-        <div class="form">
-          <div class="title">Create Task</div>
-          <div class="input-container">
-            <input
-              id="task-name"
-              class="input"
-              type="text"
-              placeholder="Task"
-            />
-          </div>
-          <div class="input-container">
-            <input
-              id="task-details"
-              class="input"
-              type="text"
-              placeholder="Details"
-            />
-          </div>
-          <div class="input-container">
-            <input
-              id="task-date"
-              class="input"
-              type="date"
-              min="2020-01-01"
-              max="2030-12-31"
-              value="2022-03-07"
-              placeholder="Date yy-mm-dd"
-            />
-          </div>
-          <div class="color-input-container">
-            <label for="task-priority">Priority</label>
-            <input
-              type="color"
-              value="#FF0000"
-              id="task-priority"
-              class="prio-input"
-            />
-          </div>
-          <div class="add-todo-buttons">
-            <button class="button-add-project-popup" id="button-add-todo">
-              Add
-            </button>
-            <button class="button-cancel-project-popup" id="button-cancel-todo">
-              Cancel
-            </button>
-          </div>
-        </div>
         <div class="todo-card">
           <div class="project-details">
             <input type="text" value="Project name" />
@@ -118,7 +115,7 @@
               </div>
             </div>
             <div class="bottom">
-              <button class="btn btn-priority"></button>
+              <input type="color" value="#FF0000" class="prio-input" />
               <p>details of task</p>
               <p>date</p>
             </div>
@@ -129,36 +126,3 @@
     <script src="script.js"></script>
   </body>
 </html>
-
-<!--
-  <div class="todo-form">
-          <div class="title">Create Task</div>
-          <form class="add-todo">
-            <div class="task-box">
-              <input
-                class="input-add-todo"
-                id="input-add-todo-task"
-                type="text"
-                autocomplete="off"
-              />
-              <label>Task</label>
-            </div>
-            <p>Priority</p>
-            <button class="btn btn-priority"></button>
-            <input
-              class="input-add-todo-details"
-              id="input-add-todo"
-              type="text"
-              autocomplete="off"
-              placeholder="Details"
-            />
-            <input
-              class="input-add-todo"
-              id="input-add-todo-date"
-              type="text"
-              autocomplete="off"
-              placeholder="Date"
-            />
-          </form>
-        </div>
--->

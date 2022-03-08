@@ -39,15 +39,15 @@ input {
 }
 
 .logo {
-  width: 25%;
-  margin-top: 50px;
+  width: 75%;
+  margin-top: 25px;
   background-color: #89d1fe;
 }
 
 .project-title {
   display: flex;
   align-items: center;
-  margin: 50px 0 50px 0;
+  margin-top: 25px;
   font-size: 30px;
 }
 
@@ -125,8 +125,24 @@ i {
   align-items: center;
 }
 
+.container {
+  opacity: 1;
+  transition: opacity 0.3s;
+  pointer-events: auto;
+}
+
+.form-container {
+  z-index: 5;
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  box-shadow: 4px 4px 2px rgb(143, 143, 145);
+  border-radius: 20px;
+}
+
 .form {
-  background-color: #e0e0e0;
+  background-color: #e6e6e6;
   border-radius: 20px;
   box-sizing: border-box;
   height: 520px;
@@ -293,5 +309,6 @@ i {
 .bottom {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-right: 15px;
 }

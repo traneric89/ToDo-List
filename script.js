@@ -1,19 +1,27 @@
 let projectArray = [];
 let projectList = document.querySelector(".project-list");
-
 let divTodoCard = document.querySelector(".todo-card");
 
 //Add project popup varaibles and buttons
 let addProjectBtn = document.getElementById("add-project");
 let addProjectPopup = document.querySelector(".add-project-popup");
 let addProjectForm = document.querySelector(".input-add-project-popup");
-let confirmAddProjectBtn = document.querySelector(".button-add-project-popup");
-let cancelProjectBtn = document.querySelector(".button-cancel-project-popup");
-
-//Event Listeners
+let confirmAddProjectBtn = document.getElementById("button-add-project-popup");
+let cancelProjectBtn = document.getElementById("button-cancel-project-popup");
+//Event listeners for add project popup
 addProjectBtn.addEventListener("click", () => addNewProjectPopup());
 confirmAddProjectBtn.addEventListener("click", () => confirmAddProject());
 cancelProjectBtn.addEventListener("click", () => removeNewProjectPopup());
+
+// Add task variables and buttons
+let todoContainer = document.querySelector(".container");
+let formContainer = document.querySelector(".form-container");
+let inputTask = document.getElementById("task-name");
+let inputDetails = document.getElementById("task-details");
+let inputDate = document.getElementById("task-date");
+let inputPrio = document.getElementById("task-priority");
+let addTaskBtn = document.getElementById("button-add-todo");
+let cancelTaskBtn = document.getElementById("button-cancel-todo");
 
 class project {
   constructor(title, toDos = []) {
@@ -23,11 +31,11 @@ class project {
 }
 
 class toDo {
-  constructor(title, prio, complete, details, date) {
+  constructor(title, details, date, prio, complete) {
     this.title = title;
-    this.prio = prio;
     this.details = details;
     this.date = date;
+    this.prio = prio;
     this.complete = complete;
   }
   toDoComplete() {
@@ -61,25 +69,28 @@ const confirmAddProject = () => {
   }
 };
 
-const renderTodoCard = (e) => {
+const renderTodoCard = (titleOfProject) => {
   let divProjectDetails = document.createElement("div");
   divProjectDetails.classList.add("project-details");
   divTodoCard.appendChild(divProjectDetails);
 
   let currentProjectTitle = document.createElement("input");
-  currentProjectTitle.value = `${e.target.textContent}`;
+  currentProjectTitle.value = titleOfProject;
   divProjectDetails.appendChild(currentProjectTitle);
 
-  let oldProjectTitle = currentProjectTitle.value;
   currentProjectTitle.addEventListener("change", (e) =>
-    projectTitleUpdate(oldProjectTitle, e)
+    projectTitleUpdate(titleOfProject, e)
   );
+  currentProjectTitle.addEventListener("change", (e) => displayProject(e));
 
   let divEditProjectButtons = document.createElement("div");
   divProjectDetails.appendChild(divEditProjectButtons);
 
   let addTodoButton = document.createElement("i");
   addTodoButton.classList.add("fas", "fa-plus-circle", "fa-md");
+  addTodoButton.addEventListener("click", () =>
+    displayAddTaskForm(titleOfProject)
+  );
   divEditProjectButtons.appendChild(addTodoButton);
 };
 
@@ -130,6 +141,44 @@ const renderTodoTask = (e) => {
   divBottom.appendChild(todoDate);
 };
 
+const confirmAddTask = (currentProject) => {
+  if (inputTask.value != "" && inputDetails.value != "") {
+    const newTask = new toDo(
+      inputTask.value,
+      inputDetails.value,
+      inputDate.value,
+      inputPrio.value,
+      true
+    );
+    console.log(projectArray);
+    let index = indexOfProjectTitle(currentProject);
+    projectArray[index].toDos = newTask;
+    todoContainer.style.opacity = "1";
+    formContainer.style.display = "none";
+    todoContainer.style.pointerEvents = "auto";
+    inputTask.value = "";
+    inputDetails.value = "";
+    console.log(projectArray);
+  }
+};
+
+const cancelAddTask = (currentProject) => {
+  todoContainer.style.opacity = "1";
+  formContainer.style.display = "none";
+  todoContainer.style.pointerEvents = "auto";
+  inputTask.value = "";
+  inputDetails.value = "";
+};
+
+const displayAddTaskForm = (currentProject) => {
+  todoContainer.style.opacity = "0.5";
+  formContainer.style.display = "block";
+  todoContainer.style.pointerEvents = "none";
+
+  addTaskBtn.addEventListener("click", () => confirmAddTask(currentProject));
+  cancelTaskBtn.addEventListener("click", () => cancelAddTask(currentProject));
+};
+
 const displayProjectTitles = () => {
   clearProjectList();
   projectArray.forEach((project) => {
@@ -142,7 +191,11 @@ const displayProjectTitles = () => {
 
 const displayProject = (project) => {
   clearTodoCard();
-  renderTodoCard(project);
+  if (project.target.textContent != "") {
+    renderTodoCard(project.target.textContent);
+  } else {
+    renderTodoCard(project.target.value);
+  }
 };
 
 const clearProjectList = () => {
@@ -153,13 +206,13 @@ const clearTodoCard = () => {
   divTodoCard.textContent = "";
 };
 
-const projectTitleUpdate = (currentProjectTitle, updatedTitle) => {
-  let indexOfProject = indexOfProjectTitleUpdate(currentProjectTitle);
+const projectTitleUpdate = (oldProjectTitle, updatedTitle) => {
+  let indexOfProject = indexOfProjectTitle(oldProjectTitle);
   projectArray[indexOfProject].title = updatedTitle.target.value;
   displayProjectTitles();
 };
 
-const indexOfProjectTitleUpdate = (currentProject) => {
+const indexOfProjectTitle = (currentProject) => {
   let index;
   projectArray.forEach((project) => {
     if (project.title == currentProject) {
