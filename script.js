@@ -94,7 +94,7 @@ const renderTodoCard = (titleOfProject) => {
   divEditProjectButtons.appendChild(addTodoButton);
 };
 
-const renderTodoTask = (e) => {
+const renderTodoTask = (title, details, date, prio, complete) => {
   let divTodoTask = document.createElement("div");
   divTodoTask.classList.add("todo");
   divTodoCard.appendChild(divTodoTask);
@@ -108,7 +108,7 @@ const renderTodoTask = (e) => {
   divTop.appendChild(divTodoTitle);
 
   let todoTitle = document.createElement("p");
-  todoTitle.textContent = e.value; //title of task from input field when creating a todo
+  todoTitle.textContent = title;
   divTodoTitle.appendChild(todoTitle);
 
   let completeCheck = document.createElement("i");
@@ -120,24 +120,30 @@ const renderTodoTask = (e) => {
   divTop.appendChild(dualButtonDiv);
 
   let trashButton = document.createElement("img");
-  editPencilButton.classList.add("trash");
-  editPencilButton.src = "/images/bin.png";
+  trashButton.classList.add("trash");
+  trashButton.src = "/images/bin.png";
   dualButtonDiv.appendChild(trashButton);
 
   let divBottom = document.createElement("div");
   divBottom.classList.add("bottom");
   divTodoTask.appendChild(divBottom);
 
-  let priorityButton = document.createElement("button");
-  priorityButton.classList.add("btn", "btn-priority");
+  let priorityButton = document.createElement("input");
+  priorityButton.type = "color";
+  priorityButton.value = prio;
+  priorityButton.classList.add("prio-input");
   divBottom.appendChild(priorityButton);
 
   let todoDetails = document.createElement("p");
-  todoDetails.textContent = e.value; //details of task from input field when creating a todo
+  todoDetails.textContent = details;
   divBottom.appendChild(todoDetails);
 
-  let todoDate = document.createElement("p");
-  todoDate.textContent = e.value; //title of task from input field when creating a todo
+  let todoDate = document.createElement("input");
+  todoDate.classList.add("todo-task-date");
+  todoDate.type = "date";
+  todoDate.min = "2020-01-01";
+  todoDate.max = "2030-12-31";
+  todoDate.value = date;
   divBottom.appendChild(todoDate);
 };
 
@@ -150,15 +156,24 @@ const confirmAddTask = (currentProject) => {
       inputPrio.value,
       true
     );
-    console.log(projectArray);
     let index = indexOfProjectTitle(currentProject);
-    projectArray[index].toDos = newTask;
+    console.log(index);
+    console.log(currentProject);
+    projectArray[index].toDos.push(newTask);
+    console.log(projectArray);
+    renderTodoTask(
+      newTask.title,
+      newTask.details,
+      newTask.date,
+      newTask.prio,
+      newTask.complete
+    );
     todoContainer.style.opacity = "1";
     formContainer.style.display = "none";
     todoContainer.style.pointerEvents = "auto";
     inputTask.value = "";
     inputDetails.value = "";
-    console.log(projectArray);
+    console.log(currentProject);
   }
 };
 
@@ -168,6 +183,7 @@ const cancelAddTask = (currentProject) => {
   todoContainer.style.pointerEvents = "auto";
   inputTask.value = "";
   inputDetails.value = "";
+  console.log(currentProject);
 };
 
 const displayAddTaskForm = (currentProject) => {

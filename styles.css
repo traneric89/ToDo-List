@@ -295,20 +295,14 @@ i {
   margin-left: 25px;
 }
 
-.btn-priority {
-  width: 25px;
-  height: 25px;
-  border-radius: 100px;
-  border: none;
-  text-decoration: none;
-  display: inline-block;
-  background-color: red;
-  cursor: pointer;
-}
-
 .bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-right: 15px;
+}
+
+.todo-task-date {
+  width: 25%;
+  font-size: 16px;
 }
