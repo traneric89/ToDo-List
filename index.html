@@ -17,7 +17,7 @@
   </head>
   <body>
     <div class="form-container">
-      <div class="form">
+      <div class="form" id="form">
         <div class="title">Create Task</div>
         <div class="input-container">
           <input id="task-name" class="input" type="text" placeholder="Task" />
@@ -107,7 +107,7 @@
           <div class="todo">
             <div class="top">
               <div class="todo-title">
-                <p>Todo 1</p>
+                <input type="text" value="Todo 1" class="task-title" />
                 <i class="fa-solid fa-square-check fa-kmd"></i>
               </div>
               <div class="dual-btn">
@@ -116,7 +116,7 @@
             </div>
             <div class="bottom">
               <input type="color" value="#FF0000" class="prio-input" />
-              <p>details of task</p>
+              <input type="text" value="Details of task" class="task-details" />
               <input
                 id="todo-task-date"
                 class="todo-task-date"

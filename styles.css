@@ -113,6 +113,7 @@ i {
   margin: 45px;
   color: var(--font-colour);
   cursor: pointer;
+  text-align: center;
 }
 
 .todo-column {
@@ -302,7 +303,18 @@ i {
   margin-right: 15px;
 }
 
+.task-title {
+  background-color: transparent;
+  width: 100px;
+}
+
 .todo-task-date {
   width: 25%;
   font-size: 16px;
+}
+
+.task-details {
+  background-color: transparent;
+  width: 70%;
+  font-size: 18px;
 }
