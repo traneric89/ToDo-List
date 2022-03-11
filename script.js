@@ -43,17 +43,6 @@ class toDo {
     this.prio = prio;
     this.complete = complete;
   }
-  toDoComplete() {
-    this.complete = !this.complete;
-  }
-  updatePrio(newPrio) {
-    this.prio = newPrio;
-  }
-  toDoEdit(title, details, date) {
-    this.title = title;
-    this.details = details;
-    this.date = date;
-  }
 }
 
 const renderTodoCard = (titleOfProject) => {
@@ -71,6 +60,12 @@ const renderTodoCard = (titleOfProject) => {
 
   let divEditProjectButtons = document.createElement("div");
   divProjectDetails.appendChild(divEditProjectButtons);
+
+  let trashButton = document.createElement("img");
+  trashButton.classList.add("trash");
+  trashButton.src = "/images/bin.png";
+  divEditProjectButtons.appendChild(trashButton);
+  trashButton.addEventListener("click", () => deleteProject());
 
   let addTodoButton = document.createElement("i");
   addTodoButton.classList.add("fas", "fa-plus-circle", "fa-md");
@@ -96,22 +91,30 @@ const renderTodoTask = (title, details, date, prio, complete) => {
   let todoTitle = document.createElement("input");
   todoTitle.value = title;
   todoTitle.classList.add("task-title");
-  todoTitle.style.width = title.length + 1 + "ch";
   divTodoTitle.appendChild(todoTitle);
   todoTitle.addEventListener("change", (e) => updateTaskTitle(details, e));
-
-  let completeCheck = document.createElement("i");
-  completeCheck.classList.add("fa-solid", "fa-square-check", "fa-kmd");
-  divTodoTitle.appendChild(completeCheck);
 
   let dualButtonDiv = document.createElement("div");
   dualButtonDiv.classList.add("dual-btn");
   divTop.appendChild(dualButtonDiv);
 
+  let completeCheck = document.createElement("i");
+  completeCheck.classList.add("fa-solid", "fa-square-check", "fa-kmd");
+  dualButtonDiv.appendChild(completeCheck);
+  if (complete) {
+    completeCheck.style.color = "#29c264";
+  } else {
+    completeCheck.style.color = "lightgrey";
+  }
+  completeCheck.addEventListener("click", () =>
+    updateTaskComplete(title, complete)
+  );
+
   let trashButton = document.createElement("img");
   trashButton.classList.add("trash");
   trashButton.src = "/images/bin.png";
   dualButtonDiv.appendChild(trashButton);
+  trashButton.addEventListener("click", () => deleteTask(title));
 
   let divBottom = document.createElement("div");
   divBottom.classList.add("bottom");
@@ -148,6 +151,7 @@ const addNewProjectPopup = () => {
 
 const removeNewProjectPopup = () => {
   addProjectPopup.classList.remove("active");
+  addProjectForm.value = "";
 };
 
 const confirmAddProject = () => {
@@ -225,7 +229,32 @@ const displayProject = (project) => {
     });
   } else {
     renderTodoCard(project.target.value);
+    indexFocusProject = indexOfProjectTitle(project.target.value);
+    projectArray[indexFocusProject].toDos.forEach((todoTask) => {
+      renderTodoTask(
+        todoTask.title,
+        todoTask.details,
+        todoTask.date,
+        todoTask.prio,
+        todoTask.complete
+      );
+    });
   }
+};
+
+const updateTodoCard = (title) => {
+  clearTodoCard();
+  renderTodoCard(title);
+  indexFocusProject = indexOfProjectTitle(title);
+  projectArray[indexFocusProject].toDos.forEach((todoTask) => {
+    renderTodoTask(
+      todoTask.title,
+      todoTask.details,
+      todoTask.date,
+      todoTask.prio,
+      todoTask.complete
+    );
+  });
 };
 
 const clearProjectList = () => {
@@ -239,6 +268,12 @@ const clearTodoCard = () => {
 const projectTitleUpdate = (oldProjectTitle, updatedTitle) => {
   let indexOfProject = indexOfProjectTitle(oldProjectTitle);
   projectArray[indexOfProject].title = updatedTitle.target.value;
+  displayProjectTitles();
+};
+
+const deleteProject = () => {
+  projectArray.splice(indexFocusProject, 1);
+  clearTodoCard();
   displayProjectTitles();
 };
 
@@ -292,6 +327,14 @@ const updateTaskPriority = (taskTitle, e) => {
   projectArray[indexFocusProject].toDos[index].prio = e.target.value;
 };
 
-const updateTaskComplete = () => {};
+const updateTaskComplete = (taskTitle, completeStatus) => {
+  let index = indexOfTask(taskTitle);
+  projectArray[indexFocusProject].toDos[index].complete = !completeStatus;
+  updateTodoCard(projectArray[indexFocusProject].title);
+};
 
-const deleteTask = () => {};
+const deleteTask = (taskTitle) => {
+  let index = indexOfTask(taskTitle);
+  projectArray[indexFocusProject].toDos.splice(index, 1);
+  updateTodoCard(projectArray[indexFocusProject].title);
+};
