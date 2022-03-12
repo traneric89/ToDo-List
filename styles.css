@@ -348,8 +348,13 @@ i {
   .project-title h2 {
     font-size: 30px;
   }
-  .dual-btn {
-    background-color: pink;
+  .todo-task-date {
+    width: 25%;
+    font-size: 14px;
+  }
+  .task-details {
+    background-color: transparent;
+    width: 65%;
   }
 }
 
@@ -362,6 +367,15 @@ i {
   }
   .todo-column {
     width: 75%;
+  }
+}
+
+@media (max-width: 1080px) {
+  .project-list h4 {
+    font-size: 28px;
+  }
+  .todo-title {
+    width: 35%;
   }
 }
 
@@ -380,5 +394,11 @@ i {
   }
   .trash {
     font-size: 28px;
+  }
+  .bottom {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 15px;
   }
 }
