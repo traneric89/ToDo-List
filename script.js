@@ -63,7 +63,7 @@ const renderTodoCard = (titleOfProject) => {
 
   let trashButton = document.createElement("img");
   trashButton.classList.add("trash");
-  trashButton.src = "/images/bin.png";
+  trashButton.src = "images/bin.png";
   divEditProjectButtons.appendChild(trashButton);
   trashButton.addEventListener("click", () => deleteProject());
 
@@ -112,7 +112,7 @@ const renderTodoTask = (title, details, date, prio, complete) => {
 
   let trashButton = document.createElement("img");
   trashButton.classList.add("trash");
-  trashButton.src = "/images/bin.png";
+  trashButton.src = "images/bin.png";
   dualButtonDiv.appendChild(trashButton);
   trashButton.addEventListener("click", () => deleteTask(title));
 
