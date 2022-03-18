@@ -178,7 +178,7 @@ const confirmAddTask = () => {
       inputDetails.value,
       inputDate.value,
       inputPrio.value,
-      true
+      false
     );
     projectArray[indexFocusProject].toDos.push(newTask);
     renderTodoTask(
