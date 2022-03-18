@@ -5,17 +5,6 @@ let projectList = document.querySelector(".project-list");
 let divTodoCard = document.querySelector(".todo-card");
 let retrievedObject;
 
-const storeLocalStorage = () => {
-  localStorage.setItem("storedProjectArray", JSON.stringify(projectArray));
-};
-
-window.addEventListener("load", () => {
-  retrievedObject = localStorage.getItem("storedProjectArray");
-  projectArray = JSON.parse(retrievedObject);
-  displayProjectTitles();
-  updateTodoCard(projectArray[0].title);
-});
-
 //Add project popup varaibles and buttons
 let addProjectBtn = document.getElementById("add-project");
 let addProjectPopup = document.querySelector(".add-project-popup");
@@ -205,7 +194,6 @@ const confirmAddTask = () => {
     inputTask.value = "";
     inputDetails.value = "";
   }
-  storeLocalStorage();
 };
 
 const cancelAddTask = () => {
@@ -253,7 +241,6 @@ const displayProject = (project) => {
       );
     });
   }
-  storeLocalStorage();
 };
 
 const updateTodoCard = (title) => {
@@ -269,7 +256,6 @@ const updateTodoCard = (title) => {
       todoTask.complete
     );
   });
-  storeLocalStorage();
 };
 
 const clearProjectList = () => {
@@ -290,7 +276,6 @@ const deleteProject = () => {
   projectArray.splice(indexFocusProject, 1);
   clearTodoCard();
   displayProjectTitles();
-  storeLocalStorage();
 };
 
 const indexOfProjectTitle = (currentProject) => {
@@ -326,25 +311,21 @@ const indexOfTaskForTitleUpdate = (taskDetails) => {
 const updateTaskTitle = (taskDetails, e) => {
   let index = indexOfTaskForTitleUpdate(taskDetails);
   projectArray[indexFocusProject].toDos[index].title = e.target.value;
-  storeLocalStorage();
 };
 
 const updateTaskDetails = (taskTitle, e) => {
   let index = indexOfTask(taskTitle);
   projectArray[indexFocusProject].toDos[index].details = e.target.value;
-  storeLocalStorage();
 };
 
 const updateTaskDate = (taskTitle, e) => {
   let index = indexOfTask(taskTitle);
   projectArray[indexFocusProject].toDos[index].date = e.target.value;
-  storeLocalStorage();
 };
 
 const updateTaskPriority = (taskTitle, e) => {
   let index = indexOfTask(taskTitle);
   projectArray[indexFocusProject].toDos[index].prio = e.target.value;
-  storeLocalStorage();
 };
 
 const updateTaskComplete = (taskTitle, completeStatus) => {
